@@ -8,6 +8,13 @@ rescue Errno::ENOENT
   return nil
 end
 
+#experimental
+def list_content(title)
+  File.read("pages/library.txt")
+rescue Errno::ENOENT
+  return nil
+end
+#experimental
 def save_content(content)
   File.open("pages/words.txt", "w") do |file|
     file.print(content)
@@ -27,6 +34,7 @@ get "/display" do
 
   @content = @content.split(/ |, |,/)
   @match = @list_raw & @content
+
   @match = @match.join(" ")
   erb :display
 end
